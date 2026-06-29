@@ -1,0 +1,194 @@
+{
+  "en": {
+    "name": "English",
+    "shell": {
+      "appTitle": "Spot the Red Flags",
+      "moduleLabel": "Scams & Social Engineering",
+      "title": "Spot the Red Flags",
+      "subtitle": "Pop the red-flag bubbles in the suspicious offer message.",
+      "coachTitle": "Safety Coach",
+      "coach": "Pop only the warning signs. Safe actions are there to test careful reading.",
+      "boardTitle": "Scene",
+      "start": "Start Scene",
+      "nextScene": "Next Scene",
+      "activity": "Go to Activity",
+      "check": "Check",
+      "continue": "Continue",
+      "playAgain": "Play Again",
+      "reset": "Restart",
+      "tutorialTitle": "How to Play",
+      "tutorialStep1": "Listen to the full scene before answering.",
+      "tutorialStep2": "Character messages appear first, then the voice reads each line.",
+      "tutorialStep3": "Choose the safest answers in each activity.",
+      "tutorialStep4": "Use mute, restart, language, and fullscreen from the top bar anytime.",
+      "languageTitle": "Choose Language",
+      "languageSubtitle": "Switch the interface language for the activity shell.",
+      "languageSelectedTitle": "Language Selected!",
+      "languageSelectedStart": "Your app is now in {language}.",
+      "languageSelectedEnd": "Let us get started!",
+      "cancel": "Cancel",
+      "apply": "Apply",
+      "rotateTitle": "Please Rotate Your Device",
+      "rotateMessage": "This activity is best experienced in landscape mode.",
+      "muted": "Turn sound on",
+      "unmuted": "Turn sound off",
+      "enterFullscreen": "Enter fullscreen",
+      "exitFullscreen": "Exit fullscreen",
+      "sceneLocked": "Listen to the full scene first.",
+      "chooseAnswer": "Choose an answer first.",
+      "correct": "Good scam spotting.",
+      "tryAgain": "Not quite. Look for the warning signs.",
+      "tried": "Good try. You can continue, or change your answer before moving on.",
+      "redFlagFound": "Good spot. That is a red flag.",
+      "complete": "Activity complete. Zara and friends are scam-spotting pros now.",
+      "stepAria": "Step {index}",
+      "sceneIllustrationAlt": "Scene illustration",
+      "sceneCount": "Scene {current} of {total}",
+      "suspiciousMessageHeader": "Suspicious message",
+      "suspiciousMessageCopy": "You won Rs 50,000 plus a phone. Pay Rs 299 to claim in 2 hours.",
+      "introKicker": "Cyber Safety Mission",
+      "introTitle": "Can you spot the offer scam?",
+      "introBody": "Join Zara, Simran, Tej, and Avi. Listen to each scene, then solve the scam-safety challenge that unlocks.",
+      "activityCanvas": "Activity",
+      "bubbleArena": "Red Flag Bubble Pop",
+      "sortArena": "Sort the Clues",
+      "stepPoints": "Step {step} of {total} - {points} pts",
+      "safeBubbleAsk": "Ask a trusted adult",
+      "safeBubbleNoClick": "Do not click unknown links",
+      "safeBubbleAdult": "Check official sources",
+      "riskyBubblesLeft": "{count} risky bubbles left",
+      "tipLabel": "Tip:",
+      "bubbleTip": "Pop only the red-flag bubbles.",
+      "cardsSorted": "{count} of {total} cards sorted",
+      "sortTip": "Drag or tap a card, then choose the correct zone.",
+      "scamTrickZone": "Scam Trick",
+      "safeZone": "Safe Move",
+      "correctPlacement": "Correct placement.",
+      "countOf": "{current} of {total}",
+      "quizLabel": "Quiz",
+      "quizCoach": "Answer one question at a time. Pick the safest option before continuing.",
+      "mythTitle": "Myth vs Fact",
+      "mythSubtitle": "Decide whether each common belief is safe or misleading.",
+      "mythCoach": "Scam myths can sound believable. Bust the myth, then read the fact.",
+      "mythStage": "Myth Check",
+      "nextMyth": "Next Myth",
+      "statementLabel": "Statement",
+      "mythButtonLine1": "Bust the",
+      "mythButtonLine2": "Myth",
+      "truthButtonLine1": "Keep as",
+      "truthButtonLine2": "Truth",
+      "factLabel": "Fact",
+      "yourAnswerSummary": "You chose {picked}. Correct answer: {correct}.",
+      "noneLabel": "none",
+      "deckComplete": "Deck complete",
+      "resultsLabel": "Results",
+      "safeButton": "Real",
+      "realButton": "Real",
+      "scamButton": "Scam",
+      "matchedCount": "{count} of {total} matched",
+      "matchPrompt": "Match each clue to the correct warning sign.",
+      "pickClueFirst": "Pick a clue first.",
+      "correctMatch": "Correct match.",
+      "completeTitle": "Scam Spotting Complete",
+      "completeBody": "You helped the group slow down, check the signs, and avoid too-good-to-be-true offers.",
+      "warningTooBig": "Too Big",
+      "warningRush": "Rush You",
+      "warningPayFirst": "Pay First",
+      "warningUnknown": "Unknown Sender",
+      "reportNote": "For serious cyber fraud in India, report at cybercrime.gov.in or call 1930.",
+      "timeUp": "Time is up. Review the safest answer.",
+      "speechAudio": {
+        "redFlagFound": "./assets/english/red-flag-found.ogg",
+        "tryAgain": "./assets/english/try-again.ogg"
+      },
+      "speechCurrencyWord": "rupees",
+      "mythSpeakerPrompt": "Listen carefully and decide if this idea is safe or misleading.",
+      "safeBubbleWrongDetail": " ",
+      "sortWrongDetail": "The card \"{card}\" was placed in {picked}, but it belongs in {correct}. Read whether it asks you to trust, pay, rush, or pause.",
+      "matchWrongDetail": "The clue \"{clue}\" matches \"{sign}\". Match the action in the clue to the exact warning sign."
+    },
+    "characters": {
+      "zara": {
+        "name": "Zara",
+        "image": "./assets/ui/mascot.webp",
+        "tone": "learner"
+      },
+      "tej": {
+        "name": "Tej",
+        "image": "./assets/pictures/bubble-icons/shield.webp",
+        "tone": "protector"
+      },
+      "simran": {
+        "name": "Simran",
+        "image": "./assets/pictures/bubble-icons/people.webp",
+        "tone": "detective"
+      },
+      "avi": {
+        "name": "Avi",
+        "image": "./assets/pictures/bubble-icons/phone.webp",
+        "tone": "hunter"
+      }
+    },
+    "activities": [
+      {
+        "id": "activity-1",
+        "title": "Spot the Red Flags",
+        "instruction": "Tick every thing that should make Zara suspicious.",
+        "type": "multi",
+        "options": [
+          "Message came from an unknown number",
+          "Prize is very large: ₹50,000 plus a phone",
+          "She must pay ₹299 to collect her prize",
+          "Only 2 hours to act",
+          "The link is a short suspicious link",
+          "The message says 100% Genuine. Guaranteed"
+        ],
+        "correct": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "speechAudio": {
+          "instruction": "./assets/english/activity-instruction.ogg",
+          "completeFeedback": "./assets/english/activity-complete-feedback.ogg"
+        },
+        "coach": "All six are red flags. Scams often combine excitement, urgency, money, and unknown links.",
+        "tutorial": {
+          "title": "How to Play",
+          "steps": [
+            "Pop only the bubbles that are warning signs in Zara's message.",
+            "Safe actions are mixed in, so read each bubble before tapping.",
+            "Every real red flag you pop adds points.",
+            "When all risky bubbles are gone, continue to the next scene."
+          ]
+        }
+      }
+    ],
+    "scenes": [
+      {
+        "title": "Spot the Red Flags",
+        "setting": "",
+        "activityIndex": 0,
+        "activityIndices": [
+          0
+        ],
+        "lines": []
+      }
+    ]
+  },
+  "gu": {
+    "name": "???????"
+  },
+  "hi": {
+    "name": "??????"
+  },
+  "mr": {
+    "name": "?????"
+  },
+  "te": {
+    "name": "??????"
+  }
+}

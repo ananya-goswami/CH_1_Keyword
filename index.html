@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Too Good to Be True Online Offers</title>
+  <link rel="icon" type="image/webp" href="./assets/ui/logo.webp" />
+  <link rel="stylesheet" href="index.css?v=20260626-cardring" />
+  <link rel="stylesheet" href="game.css?v=20260626-cardring" />
+</head>
+
+<body>
+  <div id="loader-overlay" class="loader-overlay" role="button" tabindex="0" aria-label="Tap to open the game">
+    <div class="loader-overlay-card">
+      <img src="./assets/ui/loader.gif" alt="Loading..." />
+      <p class="loader-overlay-text">Tap to Open</p>
+    </div>
+  </div>
+
+  <div class="portrait-mode-blocker">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" role="img" aria-label="Mobile icon"
+      class="rotate-device-icon">
+      <path fill="currentColor"
+        d="M16 64C16 28.7 44.7 0 80 0L304 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L80 512c-35.3 0-64-28.7-64-64L16 64zm64 0l0 304 224 0 0-304-224 0zM192 472c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32z" />
+    </svg>
+    <h2 data-i18n="rotateTitle">Please Rotate Your Device</h2>
+    <p data-i18n="rotateMessage">This activity shell is best experienced in landscape mode.</p>
+  </div>
+
+  <div class="app-container">
+    <div class="top-bar">
+      <div class="progress-container">
+        <div class="progress-dots" id="progressDots" aria-label="Activity progress"></div>
+      </div>
+
+      <div class="top-icons">
+        <button class="icon-circle" id="resetGameBtn" title="Restart shell" aria-label="Restart shell">
+          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <path
+              d="M16.5479 27.5801C13.4682 27.5801 10.8595 26.5114 8.72206 24.3739C6.5846 22.2365 5.51587 19.6279 5.51587 16.5481C5.51587 13.4683 6.5846 10.8597 8.72206 8.72219C10.8595 6.58473 13.4682 5.516 16.5479 5.516C18.1338 5.516 19.6507 5.84328 21.0987 6.49785C22.5466 7.15242 23.7877 8.08923 24.822 9.30827V6.895C24.822 6.50429 24.9544 6.177 25.2191 5.91315C25.4839 5.6493 25.8112 5.51692 26.201 5.516C26.5908 5.51508 26.9185 5.64746 27.1842 5.91315C27.4499 6.17884 27.5818 6.50612 27.58 6.895V13.79C27.58 14.1808 27.4476 14.5085 27.1829 14.7733C26.9181 15.0381 26.5908 15.17 26.201 15.1691H19.306C18.9152 15.1691 18.588 15.0367 18.3241 14.7719C18.0603 14.5071 17.9279 14.1798 17.9269 13.79C17.926 13.4002 18.0584 13.073 18.3241 12.8082C18.5898 12.5434 18.9171 12.411 19.306 12.411H23.7188C22.9833 11.124 21.978 10.1127 20.7029 9.37722C19.4278 8.64175 18.0428 8.27401 16.5479 8.27401C14.2496 8.27401 12.296 9.07843 10.6872 10.6873C9.07831 12.2961 8.27389 14.2497 8.27389 16.5481C8.27389 18.8464 9.07831 20.8 10.6872 22.4089C12.296 24.0177 14.2496 24.8221 16.5479 24.8221C18.1108 24.8221 19.5418 24.4259 20.8408 23.6334C22.1398 22.8409 23.1451 21.7777 23.8567 20.4438C24.0406 20.122 24.2993 19.8981 24.6331 19.7722C24.9668 19.6462 25.3056 19.6403 25.6494 19.7543C26.0171 19.8692 26.2814 20.1105 26.4423 20.4782C26.6032 20.846 26.5917 21.1907 26.4079 21.5125C25.4655 23.3512 24.121 24.8221 22.3743 25.9253C20.6275 27.0285 18.6854 27.5801 16.5479 27.5801Z"
+              fill="currentColor" />
+          </svg>
+        </button>
+
+        <button class="icon-circle" id="openTutorialBtn" title="How to use" aria-label="How to use">
+          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <path
+              d="M16.5482 11.7216C17.5002 11.7216 18.272 10.9498 18.272 9.99781C18.272 9.0458 17.5002 8.27405 16.5482 8.27405C15.5962 8.27405 14.8245 9.0458 14.8245 9.99781C14.8245 10.9498 15.5962 11.7216 16.5482 11.7216Z"
+              fill="currentColor" />
+            <path d="M15.1689 13.79H17.927V24.8221H15.1689V13.79Z" fill="currentColor" />
+          </svg>
+        </button>
+
+        <button class="icon-circle" id="muteBtn" title="Toggle sound" aria-label="Toggle sound">
+          <svg class="mute-on-icon" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"
+            fill="none">
+            <path
+              d="M4 9.25C4 8.56 4.56 8 5.25 8H8L12.3 4.58C13.12 3.93 14.33 4.51 14.33 5.56V18.44C14.33 19.49 13.12 20.07 12.3 19.42L8 16H5.25C4.56 16 4 15.44 4 14.75V9.25Z"
+              fill="currentColor" />
+            <path
+              d="M16.9 9.1C17.72 9.88 18.18 10.86 18.18 12C18.18 13.14 17.72 14.12 16.9 14.9"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path
+              d="M19.22 6.85C20.63 8.2 21.42 9.92 21.42 12C21.42 14.08 20.63 15.8 19.22 17.15"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <svg class="mute-off-icon" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"
+            fill="none" hidden>
+            <path
+              d="M4 9.25C4 8.56 4.56 8 5.25 8H8L12.3 4.58C13.12 3.93 14.33 4.51 14.33 5.56V18.44C14.33 19.49 13.12 20.07 12.3 19.42L8 16H5.25C4.56 16 4 15.44 4 14.75V9.25Z"
+              fill="currentColor" />
+            <path d="M16.8 8.6L21 15.4" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+            <path d="M21 8.6L16.8 15.4" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <button class="icon-circle" id="fullscreenBtn" title="Enter fullscreen" aria-label="Enter fullscreen">
+          <svg class="fullscreen-enter-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+            viewBox="0 0 34 34" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M19.9958 6.20555C19.9958 5.83981 20.141 5.48905 20.3997 5.23044C20.6583 4.97183 21.009 4.82654 21.3748 4.82654H24.1328C25.23 4.82654 26.2823 5.2624 27.0581 6.03825C27.8339 6.81409 28.2698 7.86636 28.2698 8.96356V11.7216C28.2698 12.0873 28.1245 12.4381 27.8659 12.6967C27.6073 12.9553 27.2565 13.1006 26.8908 13.1006C26.5251 13.1006 26.1743 12.9553 25.9157 12.6967C25.6571 12.4381 25.5118 12.0873 25.5118 11.7216V8.96356C25.5118 8.59783 25.3665 8.24707 25.1079 7.98846C24.8493 7.72984 24.4985 7.58456 24.1328 7.58456H21.3748C21.009 7.58456 20.6583 7.43927 20.3997 7.18065C20.141 6.92204 19.9958 6.57128 19.9958 6.20555ZM4.82666 11.7216C4.82666 12.0873 4.97195 12.4381 5.23056 12.6967C5.48918 12.9553 5.83993 13.1006 6.20567 13.1006C6.5714 13.1006 6.92216 12.9553 7.18077 12.6967C7.43939 12.4381 7.58468 12.0873 7.58468 11.7216V8.96356C7.58468 8.59783 7.72997 8.24707 7.98858 7.98846C8.24719 7.72984 8.59795 7.58456 8.96369 7.58456H11.7217C12.0874 7.58456 12.4382 7.43927 12.6968 7.18065C12.9554 6.92204 13.1007 6.57128 13.1007 6.20555C13.1007 5.83981 12.9554 5.48905 12.6968 5.23044C12.4382 4.97183 12.0874 4.82654 11.7217 4.82654H8.96369C7.86648 4.82654 6.81421 5.2624 6.03837 6.03825C5.26252 6.81409 4.82666 7.86636 4.82666 8.96356V11.7216ZM28.2698 21.3746C28.2698 21.0089 28.1245 20.6581 27.8659 20.3995C27.6073 20.1409 27.2565 19.9956 26.8908 19.9956C26.5251 19.9956 26.1743 20.1409 25.9157 20.3995C25.6571 20.6581 25.5118 21.0089 25.5118 21.3746V24.1327C25.5118 24.4984 25.3665 24.8492 25.1079 25.1078C24.8493 25.3664 24.4985 25.5117 24.1328 25.5117H21.3748C21.009 25.5117 20.6583 25.657 20.3997 25.9156C20.141 26.1742 19.9958 26.5249 19.9958 26.8907C19.9958 27.2564 20.141 27.6072 20.3997 27.8658C20.6583 28.1244 21.009 28.2697 21.3748 28.2697H24.1328C25.23 28.2697 26.2823 27.8338 27.0581 27.058C27.8339 26.2821 28.2698 25.2299 28.2698 24.1327V21.3746ZM11.7217 28.2697C12.0874 28.2697 12.4382 28.1244 12.6968 27.8658C12.9554 27.6072 13.1007 27.2564 13.1007 26.8907C13.1007 26.5249 12.9554 26.1742 12.6968 25.9156C12.4382 25.657 12.0874 25.5117 11.7217 25.5117H8.96369C8.59795 25.5117 8.24719 25.3664 7.98858 25.1078C7.72997 24.8492 7.58468 24.4984 7.58468 24.1327V21.3746C7.58468 21.0089 7.43939 20.6581 7.18077 20.3995C6.92216 20.1409 6.5714 19.9956 6.20567 19.9956C5.83993 19.9956 5.48918 20.1409 5.23056 20.3995C4.97195 20.6581 4.82666 21.0089 4.82666 21.3746V24.1327C4.82666 25.2299 5.26252 26.2821 6.03837 27.058C6.81421 27.8338 7.86648 28.2697 8.96369 28.2697H11.7217Z"
+              fill="currentColor" />
+          </svg>
+          <svg class="fullscreen-exit-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+            viewBox="0 0 31 31" fill="none" hidden>
+            <path
+              d="M7.75 23.25H5.16667C4.8007 23.25 4.49414 23.126 4.247 22.878C3.99987 22.63 3.87587 22.3235 3.875 21.9583C3.87414 21.5932 3.99814 21.2867 4.247 21.0387C4.49587 20.7907 4.80242 20.6667 5.16667 20.6667H9.04167C9.40764 20.6667 9.71463 20.7907 9.96263 21.0387C10.2106 21.2867 10.3342 21.5932 10.3333 21.9583V25.8333C10.3333 26.1993 10.2093 26.5063 9.96134 26.7543C9.71334 27.0023 9.40678 27.1259 9.04167 27.125C8.67656 27.1241 8.37 27.0001 8.122 26.753C7.874 26.5059 7.75 26.1993 7.75 25.8333V23.25ZM23.25 23.25V25.8333C23.25 26.1993 23.126 26.5063 22.878 26.7543C22.63 27.0023 22.3235 27.1259 21.9583 27.125C21.5932 27.1241 21.2867 27.0001 21.0387 26.753C20.7907 26.5059 20.6667 26.1993 20.6667 25.8333V21.9583C20.6667 21.5924 20.7907 21.2858 21.0387 21.0387C21.2867 20.7915 21.5932 20.6675 21.9583 20.6667H25.8333C26.1993 20.6667 26.5063 20.7907 26.7543 21.0387C27.0023 21.2867 27.1259 21.5932 27.125 21.9583C27.1241 22.3235 27.0001 22.6304 26.753 22.8793C26.5059 23.1282 26.1993 23.2517 25.8333 23.25H23.25ZM7.75 7.75V5.16667C7.75 4.8007 7.874 4.49414 8.122 4.247C8.37 3.99987 8.67656 3.87587 9.04167 3.875C9.40678 3.87414 9.71377 3.99814 9.96263 4.247C10.2115 4.49587 10.3351 4.80242 10.3333 5.16667V9.04167C10.3333 9.40764 10.2093 9.71463 9.96134 9.96263C9.71334 10.2106 9.40678 10.3342 9.04167 10.3333H5.16667C4.8007 10.3333 4.49414 10.2093 4.247 9.96134C3.99987 9.71334 3.87587 9.40678 3.875 9.04167C3.87414 8.67656 3.99814 8.37 4.247 8.122C4.49587 7.874 4.80242 7.75 5.16667 7.75H7.75ZM23.25 7.75H25.8333C26.1993 7.75 26.5063 7.874 26.7543 8.122C27.0023 8.37 27.1259 8.67656 27.125 9.04167C27.1241 9.40678 27.0001 9.71377 26.753 9.96263C26.5059 10.2115 26.1993 10.3351 25.8333 10.3333H21.9583C21.5924 10.3333 21.2858 10.2093 21.0387 9.96134C20.7915 9.71334 20.6675 9.40678 20.6667 9.04167V5.16667C20.6667 4.8007 20.7907 4.49414 21.0387 4.247C21.2867 3.99987 21.5932 3.87587 21.9583 3.875C22.3235 3.87414 22.6304 3.99814 22.8793 4.247C23.1282 4.49587 23.2517 4.80242 23.25 5.16667V7.75Z"
+              fill="currentColor" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="left-panel">
+        <div class="sidebar-blue-shell">
+        <div class="question-card">
+          <div class="question-desc" id="questionTextEl">
+            <p class="question-label" hidden></p>
+            <div class="polynomial-expression safety-heading">
+              <span class="expression activity-main-heading" id="activityTitle">Help Zara stay<br>safe online.</span>
+            </div>
+            <p class="activity-subtitle" id="activitySubtitle" hidden></p>
+            <p class="activity-side-progress" id="activitySideProgress" hidden></p>
+          </div>
+        </div>
+
+        <div class="answer-card">
+          <section class="zara-guide">
+            <img src="./assets/ui/mascot.webp" alt="Zara" class="zara-guide-image">
+            <div class="zara-speech">Some messages look exciting but can be <em>scams!</em><strong>Help me spot them!</strong></div>
+          </section>
+
+          <section class="info-card info-card-highlight" id="coachCard">
+            <div class="section-eyebrow">Safety Coach</div>
+            <div class="safety-coach-list">
+              <span class="coach-icon alert-icon" aria-hidden="true"></span><strong>Stay alert</strong>
+              <span class="coach-icon check-icon" aria-hidden="true"></span><strong>Check what feels unusual</strong>
+              <span class="coach-icon wise-icon" aria-hidden="true"></span><strong>Choose wisely</strong>
+            </div>
+            <p id="activityCoach" class="coach-copy" hidden></p>
+          </section>
+
+          <section class="info-card feedback-side-card" id="feedbackSideCard" hidden>
+            <div class="section-eyebrow">Feedback</div>
+            <p id="activityFeedback" class="coach-copy"></p>
+          </section>
+
+          <section class="info-card recap-side-card" id="recapSideCard" hidden></section>
+
+        </div>
+        </div>
+        <div class="sidebar-motto"><span aria-hidden="true"></span> Be <b>Smart.</b> Be <b>Safe.</b> Be <b>Secure.</b></div>
+      </div>
+
+      <div class="right-panel">
+        <div class="canvas-block">
+          <h3 id="activityCanvasTitle">Play Area</h3>
+          <div id="interactionHost" class="interaction-host-area"></div>
+        </div>
+        <div id="feedbackGifContainer" class="answer-sparkle-layer" aria-hidden="true"></div>
+
+        <div class="footer-buttons check-btn-wrap" id="footerButtons">
+          <div class="footer-actions" id="footerActions">
+            <button class="btn" id="primaryActionBtn" type="button">Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tutorialOverlay" class="tutorial-overlay">
+    <div class="tutorial-modal">
+      <button id="closeTutorialBtn" class="tutorial-close-btn" aria-label="Close tutorial">
+        <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="15.5" cy="15.5" r="13.5" stroke="currentColor" stroke-width="2.2" />
+          <path
+            d="M10.7324 21.3786L9.58252 20.1692L14.1819 15.3314L9.58252 10.4936L10.7324 9.28418L15.3318 14.122L19.9312 9.28418L21.0811 10.4936L16.4817 15.3314L21.0811 20.1692L19.9312 21.3786L15.3318 16.5409L10.7324 21.3786Z"
+            fill="currentColor" />
+        </svg>
+      </button>
+      <h2 id="tutorialTitle">How to Use</h2>
+
+      <div class="tutorial-step">
+        <div class="tutorial-step-number">1</div>
+        <p class="tutorial-step-text" id="tutorialStep1">Use the center play area for the main game interaction.</p>
+      </div>
+
+      <div class="tutorial-step">
+        <div class="tutorial-step-number">2</div>
+        <p class="tutorial-step-text" id="tutorialStep2">Connect your game state to the progress dots and footer actions.</p>
+      </div>
+
+      <div class="tutorial-step">
+        <div class="tutorial-step-number">3</div>
+        <p class="tutorial-step-text" id="tutorialStep3">Keep restart, language, mute, and fullscreen available from the top bar.</p>
+      </div>
+
+      <div class="tutorial-step">
+        <div class="tutorial-step-number">4</div>
+        <p class="tutorial-step-text" id="tutorialStep4">Replace this placeholder flow when your game is ready.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="quest-toast" aria-live="polite"></div>
+
+  <script type="module" src="index.js?v=20260626-cardring"></script>
+</body>
+
+</html>
