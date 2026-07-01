@@ -2527,9 +2527,10 @@ body:has(.key-stage) .bubble-progress-row {
   top: 100px;
 }
 
-/* In windowed (not browser-fullscreen) mode, nudge the OPENED row up a little more. */
+/* In windowed (not browser-fullscreen) mode, keep the OPENED row clear of the
+   banner (whose bottom sits at ~94px) so the two no longer overlap. */
 body:not(.is-browser-fullscreen):has(.key-stage) .bubble-progress-row {
-  top: 88px;
+  top: 108px;
 }
 
 body:has(.key-stage) .bubble-progress-row > strong {
@@ -2764,6 +2765,7 @@ body:has(.key-stage) #coachCard .safety-coach-list {
   font-size: clamp(0.98rem, 1.2vw, 1.26rem);
   line-height: 1.22;
   text-align: justify;
+  text-align: left;
 }
 
 /* Bigger "YOUR GOAL" / "WHAT YOU'LL DO" headings and matching icons. */

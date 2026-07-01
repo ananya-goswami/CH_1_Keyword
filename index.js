@@ -1025,12 +1025,15 @@ function renderBubbleBurstActivity(activity) {
     if (!state.expandedCardId) return;
     if (!state.keyCardAudioDone) return;
     const popup = ui.host.querySelector('.key-card-popup');
+    // A close is already animating (e.g. a second tap of a double-tap): ignore it,
+    // otherwise the turn would advance twice and cards would skip out of sequence.
+    if (popup && popup.classList.contains('just-closed')) return;
     state.answerEffectKey = `close:${state.expandedCardId}`;
     stopActiveSpeechAudio();
     const advanceTurn = () => {
       if (state.keyCardTurn < VOCAB_CARD_CONFIG.length) state.keyCardTurn += 1;
     };
-    if (popup && !popup.classList.contains('just-closed')) {
+    if (popup) {
       popup.classList.remove('just-flipped');
       popup.classList.add('just-closed');
       setTimeout(() => {
@@ -2222,4 +2225,10 @@ async function initialize() {
 }
 
 window.addEventListener('beforeunload', cancelVoice);
+// Stop any playing voice as soon as the tab/window loses focus, so audio only
+// plays while this tab is actually in the foreground.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) cancelVoice();
+});
+window.addEventListener('pagehide', cancelVoice);
 window.addEventListener('load', initialize);
