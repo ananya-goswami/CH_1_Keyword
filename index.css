@@ -79,6 +79,7 @@ body {
   height: 100%;
   min-width: 320px;
   overflow: hidden;
+  user-select: none;
 }
 
 body,
@@ -437,6 +438,19 @@ button {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+/* While the game contents are still loading: show only the loader and keep the
+   overlay non-interactive so nothing can be tapped until everything is ready. */
+.loader-overlay.is-loading {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Once loading is done the overlay becomes the "Tap to Open" gate. */
+.loader-overlay.is-ready {
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .loader-overlay img {
@@ -945,14 +959,46 @@ body.startup-gate-active .app-container {
   }
 }
 
-@media (max-width: 1100px) {
+@media (orientation: landscape) {
+  html,
+  body {
+    overflow: hidden;
+  }
+
+  .app-container {
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
   .content {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
   }
 
   .left-panel {
-    flex: 0 0 auto;
-    max-height: 36dvh;
+    flex: 0 0 clamp(260px, 30vw, 330px);
+    max-height: none;
+  }
+
+  .right-panel {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .content {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .left-panel {
+    flex: 0 0 clamp(260px, 30vw, 330px);
+    max-height: none;
   }
 
   .right-panel {
@@ -964,54 +1010,96 @@ body.startup-gate-active .app-container {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 960px) and (orientation: landscape) {
+  .app-container {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .content {
+    gap: 10px;
+  }
+
+  .left-panel {
+    flex: 0 0 clamp(220px, 29vw, 280px);
+    gap: 10px;
+  }
+
+  .right-panel {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
   html,
   body {
-    overflow: auto;
+    overflow: hidden;
   }
 
   .app-container {
     min-height: 100dvh;
-    height: auto;
-    overflow: visible;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   .top-bar {
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
     min-height: 0;
   }
 
+  .progress-container {
+    min-width: 0;
+    padding: 8px 10px;
+  }
+
+  .progress-dots {
+    gap: 6px;
+  }
+
   .top-icons {
-    gap: 10px;
+    gap: 8px;
+    flex: 0 0 auto;
   }
 
   .icon-circle {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-width: 2px;
   }
 
   .icon-circle svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
   .content {
-    min-height: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
   }
 
   .left-panel {
+    flex: 0 0 clamp(200px, 33vw, 248px);
+    gap: 8px;
+    min-height: 0;
     max-height: none;
-    overflow: visible;
   }
 
   .right-panel {
-    min-height: 560px;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    padding: 8px;
   }
 
   .status-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .interaction-host-area {
+    padding: 10px;
   }
 
   .check-btn-wrap {
@@ -1040,11 +1128,11 @@ body.startup-gate-active .app-container {
 }
 
 @media (orientation: portrait) {
-  .portrait-mode-blocker {
-    display: flex;
+  body > *:not(.portrait-mode-blocker) {
+    display: none !important;
   }
 
-  .app-container {
-    display: none;
+  .portrait-mode-blocker {
+    display: flex;
   }
 }

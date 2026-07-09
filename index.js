@@ -1,4 +1,49 @@
 const GAME_STEPS = 1;
+const GAME_CATEGORY = 'Scams & Social Engineering';
+
+// Analytics bridge — forwards game events to the hosting Android app when present.
+function sendGameEvent(functionName, dataArgs) {
+  console.log(`%cANALYTICS: ${functionName}`, 'color: #386AF6; font-weight: bold;', dataArgs);
+  const message = {
+    functionName: functionName,
+    args: dataArgs
+  };
+  const jsonString = JSON.stringify(message);
+  if (window.AndroidBridge && window.AndroidBridge.postMessage) {
+    window.AndroidBridge.postMessage(jsonString);
+  }
+}
+function practiceActivityStarted(data) {
+  sendGameEvent("practiceActivityStarted", data);
+}
+function practiceActivityCompleted(data) {
+  sendGameEvent("practiceActivityCompleted", data);
+}
+function practiceQuestionAttempted(data) {
+  sendGameEvent("practiceQuestionAttempted", data);
+}
+function closeActivity() {
+  sendGameEvent("closeActivity", {});
+}
+
+// Timestamp of when play actually started (loader tapped) and a one-shot guard so
+// the completion event fires only once per play-through.
+let gameStartTime = 0;
+let completionReported = false;
+
+function reportActivityCompleted() {
+  if (completionReported) return;
+  completionReported = true;
+  const totalQuestions = VOCAB_CARD_CONFIG.length;
+  const firstTryCorrectCount = state.openedCards.size;
+  const totalTime = gameStartTime ? (Date.now() - gameStartTime) / 1000 : 0;
+  practiceActivityCompleted({
+    category: GAME_CATEGORY,
+    timeSpent: Math.round(totalTime),
+    totalQuestion: totalQuestions,
+    correctQuestion: firstTryCorrectCount
+  });
+}
 
 let supportedLanguages = {
   en: 'English',
@@ -48,6 +93,10 @@ let currentLanguage = 'en';
 let activeSpeech = null;
 let activeSpeechAudio = null;
 let availableVoices = [];
+// Track audio that we paused because the tab was hidden, so we only resume what
+// we ourselves paused when the tab becomes visible again.
+let audioPausedByHidden = false;
+let speechPausedByHidden = false;
 
 const state = {
   step: 1,
@@ -393,7 +442,16 @@ function activateStartupGate(onOpen) {
     return;
   }
   clearStartupGateListeners();
-  ui.loader.classList.remove('hidden');
+  // Content is loaded now: turn the plain loader into the clickable "Tap to Open"
+  // gate and reveal its label.
+  ui.loader.classList.remove('hidden', 'is-loading');
+  ui.loader.classList.add('is-ready');
+  ui.loader.setAttribute('role', 'button');
+  ui.loader.setAttribute('tabindex', '0');
+  ui.loader.setAttribute('aria-label', 'Tap to open the game');
+  ui.loader.removeAttribute('aria-busy');
+  const gateText = ui.loader.querySelector('.loader-overlay-text');
+  if (gateText) gateText.hidden = false;
   document.body.classList.add('startup-gate-active');
   const openGate = (event) => {
     if (event.type === 'keydown' && !['Enter', ' ', 'Spacebar'].includes(event.key)) return;
@@ -519,6 +577,28 @@ function cancelVoice() {
     activeSpeechAudio = null;
   }
   state.speaking = false;
+}
+
+function pauseAudioForHiddenTab() {
+  if (activeSpeechAudio && !activeSpeechAudio.paused && !activeSpeechAudio.ended) {
+    activeSpeechAudio.pause();
+    audioPausedByHidden = true;
+  }
+  if ('speechSynthesis' in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+    window.speechSynthesis.pause();
+    speechPausedByHidden = true;
+  }
+}
+
+function resumeAudioForVisibleTab() {
+  if (audioPausedByHidden && activeSpeechAudio) {
+    activeSpeechAudio.play().catch(() => {});
+  }
+  audioPausedByHidden = false;
+  if (speechPausedByHidden && 'speechSynthesis' in window) {
+    window.speechSynthesis.resume();
+  }
+  speechPausedByHidden = false;
 }
 
 function refreshVoices() {
@@ -721,6 +801,9 @@ function goToNextMythFrame() {
 function restartGame() {
   cancelVoice();
   stopQuizTimer();
+  // Fresh play-through: reset the completion guard and restart the play timer.
+  completionReported = false;
+  gameStartTime = Date.now();
   state.phase = 'activity';
   state.step = 1;
   state.sceneIndex = 0;
@@ -1925,6 +2008,7 @@ function renderGame() {
       return;
     }
     if (activity.id === 'activity-1' && isActivityCorrect(activity)) {
+      reportActivityCompleted();
       setFooterButtons([{ label: t('playAgain'), onClick: restartGame }]);
       return;
     }
@@ -2220,15 +2304,22 @@ async function initialize() {
   const initialActivity = getCurrentActivity();
   state.tutorialPrompt = initialActivity?.instruction || '';
   activateStartupGate(() => {
+    gameStartTime = Date.now();
+    completionReported = false;
+    practiceActivityStarted({ category: GAME_CATEGORY });
     playFirstPageInstruction();
   });
 }
 
 window.addEventListener('beforeunload', cancelVoice);
-// Stop any playing voice as soon as the tab/window loses focus, so audio only
-// plays while this tab is actually in the foreground.
+// Pause audio when the tab is hidden and resume it when the tab is shown again,
+// so playback continues from where it left off instead of restarting.
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) cancelVoice();
+  if (document.hidden) {
+    pauseAudioForHiddenTab();
+  } else {
+    resumeAudioForVisibleTab();
+  }
 });
 window.addEventListener('pagehide', cancelVoice);
 window.addEventListener('load', initialize);

@@ -476,7 +476,7 @@
 
 .speaker-line span {
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -694,7 +694,7 @@
 .myth-fact-card p {
   padding: 8px 10px;
   color: var(--text-secondary);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 800;
   line-height: 1.3;
 }
@@ -703,7 +703,7 @@
 .fact-label {
   padding: 5px 10px;
   color: #fff;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 1000;
   text-transform: uppercase;
 }
@@ -836,7 +836,7 @@
   border-radius: 999px;
   background: var(--brand-highlight);
   color: var(--brand-secondary);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1070,7 +1070,7 @@
   display: flex;
   justify-content: space-between;
   color: #e5e7eb;
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   font-weight: 900;
   padding: 2px 7px 5px;
 }
@@ -1079,7 +1079,7 @@
   padding: 7px 9px;
   border-radius: 12px 12px 4px 4px;
   color: #fff;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 1000;
 }
 
@@ -1129,7 +1129,7 @@
 
 .mock-screen-body small {
   color: var(--text-muted);
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   font-weight: 900;
 }
 
@@ -1139,7 +1139,7 @@
   place-items: center;
   padding: 10px;
   color: var(--text-secondary);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 900;
   line-height: 1.28;
 }
@@ -1280,7 +1280,7 @@
   box-shadow: 0 8px 18px rgba(56, 106, 246, 0.2);
   color: var(--brand-secondary);
   cursor: pointer;
-  font-size: clamp(0.66rem, 0.9vw, 0.8rem);
+  font-size: clamp(0.875rem, 1vw, 1rem);
   font-weight: 900;
   line-height: 1.18;
   text-align: center;
@@ -1294,7 +1294,7 @@
   width: clamp(106px, 10.8vw, 124px);
   height: clamp(106px, 10.8vw, 124px);
   padding: 12px;
-  font-size: clamp(0.62rem, 0.82vw, 0.74rem);
+  font-size: clamp(0.875rem, 0.95vw, 0.94rem);
 }
 
 .burst-bubble.red-flag {
@@ -1679,7 +1679,7 @@
   border-radius: 999px;
   background: #fff7ed;
   color: #9a3412;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 1000;
 }
 
@@ -2117,8 +2117,8 @@ body:has(.burst-stage) .app-container {
 
 body:has(.burst-stage) .top-bar {
   position: absolute;
-  top: 22px;
-  right: 28px;
+  top: 14px;
+  right: 16px;
   z-index: 20;
 }
 
@@ -2137,8 +2137,8 @@ body:has(.burst-stage) #muteBtn {
 }
 
 body:has(.burst-stage) .icon-circle {
-  width: 56px;
-  height: 56px;
+  width: clamp(42px, 4vw, 52px);
+  height: clamp(42px, 4vw, 52px);
   border: 1px solid #16226c;
   background: #1a2c84;
   color: #fff;
@@ -2516,8 +2516,13 @@ body:has(.burst-stage) .bubble-frame {
 }
 
 body:has(.key-stage) .bubble-mission-banner {
-  top: 8px;
-  width: min(760px, 62%);
+  top: 10px;
+  /* Cap the width AND nudge the banner left so its right edge always clears the
+     top-right mute/fullscreen icons (which sit over the right of the play area).
+     `calc(100% - 240px)` reserves the right strip for the icons; the small left shift
+     guarantees clearance even on narrower frames. */
+  width: min(680px, calc(100% - 240px));
+  transform: translateX(calc(-50% - 40px));
   border-radius: 32px;
   box-shadow: none;
 }
@@ -2603,6 +2608,7 @@ body:has(.key-stage) .bubble-progress-dots i {
   font-size: clamp(1.05rem, 1.7vw, 1.7rem);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  white-space: nowrap;
   box-shadow: 0 4px 0 rgba(65, 84, 150, 0.2);
 }
 
@@ -2646,7 +2652,7 @@ body:has(.burst-stage) .burst-bubble.long-bubble {
   width: clamp(154px, min(16vw, 26vh), 228px);
   height: clamp(154px, min(16vw, 26vh), 228px);
   padding: clamp(10px, 1.8vh, 17px) 11px clamp(8px, 1.3vh, 12px);
-  font-size: clamp(0.74rem, 1.02vw, 1.05rem);
+  font-size: clamp(0.875rem, 1.02vw, 1.05rem);
 }
 
 .skin-blue { background: #68b9ff; }
@@ -2723,7 +2729,11 @@ body:has(.burst-stage) .burst-bubble.wrong-pop {
   box-shadow: 0 0 0 6px rgba(239, 51, 64, 0.28), 0 8px 18px rgba(163, 20, 36, 0.24);
 }
 
-body:has(.key-stage) .zara-guide {
+/* Keep the mascot speech bubble hidden on the keyword stage at EVERY width. It must
+   beat the burst-stage `.zara-guide { display: block }` rules inside the max-width
+   media blocks (the stage element carries both `key-stage` and `burst-stage`), so this
+   selector is made more specific via `.answer-card`. */
+body:has(.key-stage) .answer-card .zara-guide {
   display: none;
 }
 
@@ -2810,6 +2820,44 @@ body:has(.key-stage) .activity-subtitle {
   display: none;
 }
 
+/* Short viewports (e.g. 1366x768 laptops): compact the keyword left-panel cards so the
+   title + YOUR GOAL + WHAT YOU'LL DO + motto always fit without clipping. Placed after
+   the burst-stage media blocks so it wins for the shared stage element. */
+@media (max-height: 800px) {
+  body:has(.key-stage) .safety-heading .expression.activity-main-heading {
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  }
+  body:has(.key-stage) .question-card { padding: 12px 14px; }
+  body:has(.key-stage) .answer-card { gap: 10px; }
+  body:has(.key-stage) #coachCard .safety-coach-list,
+  body:has(.key-stage) .key-do-list {
+    font-size: clamp(0.9rem, 1.1vw, 1.12rem);
+    padding: 8px 10px;
+    gap: 6px 8px;
+    line-height: 1.18;
+  }
+  body:has(.key-stage) #coachCard .section-eyebrow,
+  body:has(.key-stage) #recapSideCard .section-eyebrow {
+    font-size: clamp(1.02rem, 1.3vw, 1.28rem);
+  }
+  body:has(.key-stage) .coach-icon { width: 36px; height: 36px; }
+  body:has(.key-stage) .sidebar-motto { font-size: clamp(0.8rem, 1vw, 1rem); padding: 7px 8px; }
+}
+
+@media (max-height: 640px) {
+  body:has(.key-stage) .safety-heading .expression.activity-main-heading {
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+  }
+  body:has(.key-stage) .answer-card { gap: 6px; }
+  body:has(.key-stage) #coachCard .safety-coach-list,
+  body:has(.key-stage) .key-do-list {
+    font-size: clamp(0.82rem, 1vw, 1rem);
+    padding: 6px 8px;
+    gap: 4px 8px;
+  }
+  body:has(.key-stage) .coach-icon { width: 30px; height: 30px; }
+}
+
 .mission-book {
   width: clamp(48px, min(5vw, 8vh), 68px);
   height: clamp(48px, min(5vw, 8vh), 68px);
@@ -2865,46 +2913,59 @@ body:has(.key-stage) .bubble-progress-row {
 }
 
 .key-card-grid {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  left: 50%;
-  /* Sit in the same vh-relative play band bubble-burst's .bubble-arena uses, so the
-     deck stays consistently positioned between the fixed header (banner + progress)
-     and the fixed footer button at ANY viewport height (windowed, fullscreen, exit). */
-  top: clamp(182px, 20vh, 202px);
-  bottom: clamp(92px, 13vh, 116px);
   width: min(940px, 90%);
-  margin: 0;
-  /* translateX(-50%) horizontally centers the deck in the play area. Keep this a PLAIN,
-     always-valid transform — do NOT feed scale() a custom-property/calc that can resolve
-     to an invalid value, because a single invalid transform function makes the browser
-     drop the ENTIRE transform, which removes this centering and slams the deck to the
-     right edge. Short-viewport shrinking is done with discrete @media steps below. */
-  transform: translateX(-50%);
-  transform-origin: center center;
+  height: 330px;
+  margin: 168px auto 40px;
   perspective: 1200px;
+  /* The deck is centred by `margin: auto`, NOT by a transform, so it is safe to use
+     scale() to shrink the whole (fixed-pixel) deck as the frame gets smaller — a scale()
+     here can never drop the horizontal centering. Scaling from the CENTRE pulls the deck
+     away from BOTH the header (banner/progress) and the footer button as it shrinks.
+     Discrete steps keep every transform value valid. */
+  transform-origin: center center;
 }
 
-/* The cards are fixed-pixel (center card is 320px tall) and do NOT shrink with the band
-   like bubble-burst's bubbles do, so on short viewports scale the whole deck down so it
-   stays inside the band instead of colliding with the header/button. Discrete steps with
-   no calc keep the transform always valid (centering never breaks). */
-@media (max-height: 680px) {
-  .key-card-grid { transform: translateX(-50%) scale(0.88); }
-}
-@media (max-height: 600px) {
-  .key-card-grid { transform: translateX(-50%) scale(0.78); }
-}
-@media (max-height: 520px) {
-  .key-card-grid { transform: translateX(-50%) scale(0.68); }
-}
+/* Shrink the deck as the frame narrows (width) or shortens (height) so the cards scale
+   down with the screen instead of overflowing or colliding with the header/footer.
+   Height steps first, then width steps: on a screen that is BOTH narrow and short, the
+   later (width) step wins — width is the tighter constraint and its smallest step (0.56)
+   also comfortably clears the header/footer. */
+@media (max-height: 760px) { .key-card-grid { transform: scale(0.88); } }
+@media (max-height: 660px) { .key-card-grid { transform: scale(0.78); } }
+@media (max-height: 560px) { .key-card-grid { transform: scale(0.68); } }
+@media (max-width: 1280px) { .key-card-grid { transform: scale(0.9); } }
+@media (max-width: 1120px) { .key-card-grid { transform: scale(0.8); } }
+@media (max-width: 1000px) { .key-card-grid { transform: scale(0.72); } }
+@media (max-width: 900px)  { .key-card-grid { transform: scale(0.64); } }
+@media (max-width: 800px)  { .key-card-grid { transform: scale(0.56); } }
 
-/* Narrow widths: the banner + progress row wrap to two rows (mirrors bubble-burst's
-   max-width retune), so push the deck band down to clear the taller header. */
-@media (max-width: 760px) {
-  body:has(.key-stage) .key-card-grid {
-    top: clamp(196px, 30vh, 220px);
-    bottom: clamp(88px, 12vh, 108px);
+/* Narrow frames: on smaller widths the mission-banner title/subtitle wrap to more lines
+   and the banner grows tall enough to collide with the OPENED pill below it. Shrink the
+   banner text (and tighten padding) so it stays ~2 short lines and always clears the row. */
+@media (max-width: 1100px) {
+  body:has(.key-stage) .bubble-mission-banner {
+    padding: 6px 16px;
+    gap: 8px;
+  }
+  body:has(.key-stage) .bubble-mission-banner strong {
+    font-size: clamp(0.92rem, 1.7vw, 1.35rem);
+  }
+  body:has(.key-stage) .bubble-mission-banner small {
+    font-size: clamp(0.72rem, 1.15vw, 0.92rem);
+  }
+}
+@media (max-width: 900px) {
+  body:has(.key-stage) .bubble-mission-banner strong {
+    font-size: clamp(0.82rem, 2vw, 1.12rem);
+  }
+  body:has(.key-stage) .bubble-mission-banner small {
+    font-size: clamp(0.66rem, 1.5vw, 0.84rem);
+  }
+  body:has(.key-stage) .bubble-mission-banner .mission-book {
+    width: clamp(34px, 5vw, 46px);
+    height: clamp(34px, 5vw, 46px);
   }
 }
 
@@ -3282,7 +3343,7 @@ body:has(.key-card-popup) .left-panel {
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 13px;
+  font-size: clamp(12px, 1vw, 13px);
   font-weight: 900;
   letter-spacing: 0.04em;
 }
@@ -3329,7 +3390,7 @@ body:has(.key-card-popup) .left-panel {
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 13px;
+  font-size: clamp(12px, 1vw, 13px);
   font-weight: 900;
 }
 
@@ -3808,42 +3869,49 @@ body:has(.burst-stage) .quest-toast {
 @media (max-width: 1100px) {
   body:has(.burst-stage) .app-container {
     min-height: 100dvh;
-    height: auto;
-    overflow: visible;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   body:has(.burst-stage) .content {
-    flex-direction: column;
-    min-height: 100dvh;
+    flex-direction: row;
+    min-height: 0;
   }
 
   body:has(.burst-stage) .left-panel {
-    flex: 0 0 auto;
-    width: 100%;
+    flex: 0 0 clamp(220px, 28vw, 300px);
+    width: auto;
     max-height: none;
-    border-right: 0;
-    border-bottom: 1px solid rgba(31, 30, 105, 0.74);
+      border-right: 1px solid rgba(31, 30, 105, 0.74);
+    border-bottom: 0;
   }
 
   body:has(.burst-stage) .sidebar-blue-shell {
-    display: grid;
-    grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.5fr);
+    display: flex;
+    flex-direction: column;
     align-items: stretch;
   }
 
   body:has(.burst-stage) .question-card,
   body:has(.burst-stage) #coachCard {
-    height: 100%;
+    height: auto;
   }
 
   body:has(.burst-stage) .answer-card {
-    display: grid;
-    grid-template-columns: minmax(190px, 0.8fr) minmax(220px, 1fr);
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0;
   }
 
   body:has(.burst-stage) .zara-guide {
+    display: block;
+    position: relative;
+    inset: auto;
+    margin-top: 4px;
     height: clamp(126px, 19vw, 180px);
+    overflow: visible;
+    min-height: 0;
   }
 
   body:has(.burst-stage) .zara-guide-image {
@@ -3854,7 +3922,7 @@ body:has(.burst-stage) .quest-toast {
 
   body:has(.burst-stage) .zara-speech {
     width: 54%;
-    font-size: clamp(0.875rem, 1.4vw, 0.94rem);
+    font-size: clamp(0.72rem, 1.4vw, 0.94rem);
   }
 
   body:has(.burst-stage) #coachCard {
@@ -3864,7 +3932,7 @@ body:has(.burst-stage) .quest-toast {
 
   body:has(.burst-stage) .right-panel {
     flex: 1 1 auto;
-    min-height: clamp(540px, 72dvh, 680px);
+    min-height: 0;
   }
 
   .bubble-mission-banner {
@@ -3878,7 +3946,13 @@ body:has(.burst-stage) .quest-toast {
 
 @media (max-width: 760px) {
   body:has(.burst-stage) {
-    overflow: auto;
+    overflow: hidden;
+  }
+
+  body:has(.burst-stage) .app-container {
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   body:has(.burst-stage) .top-bar {
@@ -3901,17 +3975,39 @@ body:has(.burst-stage) .quest-toast {
   }
 
   body:has(.burst-stage) .left-panel {
-    padding: 8px;
+    flex: 0 0 clamp(190px, 31vw, 230px);
+    width: auto;
+    max-height: none;
+      border-right: 1px solid rgba(31, 30, 105, 0.74);
+    border-bottom: 0;
+    padding: 6px;
   }
 
-  body:has(.burst-stage) .sidebar-blue-shell,
+  body:has(.burst-stage) .content {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    min-height: 0;
+  }
+
+  body:has(.burst-stage) .sidebar-blue-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px;
+    border-width: 2px;
+    border-radius: 32px;
+  }
+
   body:has(.burst-stage) .answer-card {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    gap: 0;
   }
 
   body:has(.burst-stage) .question-card {
-    padding: 10px;
+    padding: clamp(10px, 1.5vh, 14px) 8px;
   }
 
   body:has(.burst-stage) .safety-heading .expression.activity-main-heading,
@@ -3934,7 +4030,8 @@ body:has(.burst-stage) .quest-toast {
   }
 
   body:has(.burst-stage) .right-panel {
-    min-height: 620px;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .bubble-mission-banner {
@@ -3980,7 +4077,7 @@ body:has(.burst-stage) .quest-toast {
 
 @media (max-width: 480px) {
   body:has(.burst-stage) .right-panel {
-    min-height: 680px;
+    min-height: 0;
   }
 
   .bubble-mission-banner strong {
@@ -3988,7 +4085,7 @@ body:has(.burst-stage) .quest-toast {
   }
 
   .bubble-mission-banner small {
-    font-size: 14px;
+    font-size: clamp(0.68rem, 3.5vw, 0.86rem);
   }
 
   .bubble-progress-row > strong {
@@ -4005,6 +4102,7 @@ body:has(.burst-stage) .quest-toast {
     height: 16px;
   }
 }
+
 
 @keyframes air-bubble-pop {
   0% {
@@ -4463,7 +4561,7 @@ body:has(.final-mission-stage) .interaction-host-area {
 
 .final-clue-card span {
   margin-top: 5px;
-  font-size: clamp(0.62rem, 0.92vw, 0.86rem);
+  font-size: clamp(0.875rem, 0.92vw, 0.94rem);
   font-weight: 800;
   line-height: 1.05;
 }
